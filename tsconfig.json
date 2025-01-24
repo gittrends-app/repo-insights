@@ -1,9 +1,21 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist"
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["es5", "es6", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "jsx": "preserve",
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [{ "name": "next" }]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/*.spec.ts", "src/**/*.test.ts"]
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js"],
+  "exclude": ["node_modules", "libs/**", "**/*.spec.ts", "**/*.test.ts"]
 }

@@ -9,7 +9,7 @@ RUN yarn build
 FROM node:20-alpine AS base
 WORKDIR /app
 COPY package.json ./
-COPY --from=core /app/libs/core ./libs/core
+COPY --from=core --exclude=node_modules /app/libs/core ./libs/core
 RUN yarn install --ignore-scripts
 
 FROM node:20-alpine as deps

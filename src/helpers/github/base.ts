@@ -27,6 +27,8 @@ const fetcher = limiter(
 /**
  *  Create a service
  */
+export function createService(namespace?: string, token?: string): GithubService;
+export function createService(namespace?: string, token?: string, Cache?: Constructor<Cache>): CacheService;
 export function createService(namespace: string = 'public', token?: string, Cache?: Constructor<Cache>) {
   const normalizedNamespace = namespace
     .replace('/', '@')

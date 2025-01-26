@@ -1,5 +1,5 @@
 import { Release, RepositoryNode, Stargazer, Watcher } from '@/core';
-import { createBrowserService } from '@/helpers/github/browser';
+import { createService } from '@/helpers/github/browser';
 import { useEffect, useState } from 'react';
 import { useBoolean } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';
@@ -64,7 +64,7 @@ export default function useResources<T extends RepositoryNode>(
         if (paused || !repo) return;
 
         // @ts-expect-error - This is a hack to avoid type errors
-        const it = createBrowserService(repo.name_with_owner, user?.__acess_token).resources(resource, {
+        const it = createService(repo.name_with_owner, user?.__acess_token).resources(resource, {
           repository: repo.id,
           cursor: data.cursor || undefined
         });

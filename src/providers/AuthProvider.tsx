@@ -1,7 +1,7 @@
 'use client';
 
 import { Actor } from '@/core';
-import { createBrowserService } from '@/helpers/github/browser';
+import { createService } from '@/helpers/github/browser';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { createContext, useEffect, useMemo, useRef } from 'react';
 import { createStore, StoreApi, useStore } from 'zustand';
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         (set) => ({
           user: null,
           signIn: async (accessToken: string) => {
-            const user = await createBrowserService('profile', accessToken).user();
+            const user = await createService('profile', accessToken, false).viewer();
             set({ user: { ...user!, __acess_token: accessToken } });
           },
           signOut: async () => set({ user: null })

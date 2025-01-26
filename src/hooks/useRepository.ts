@@ -1,4 +1,4 @@
-import { createBrowserService } from '@/helpers/github/browser';
+import { createService } from '@/helpers/github/browser';
 import { useAsync } from 'react-use';
 import useAuth from './useAuth';
 
@@ -7,5 +7,5 @@ import useAuth from './useAuth';
  */
 export default function useRepository(owner: string, name: string) {
   const { user } = useAuth();
-  return useAsync(async () => createBrowserService(undefined, user?.__acess_token).repository(owner, name), [user]);
+  return useAsync(async () => createService(undefined, user?.__acess_token).repository(owner, name), [user]);
 }

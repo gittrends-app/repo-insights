@@ -1,4 +1,4 @@
-import { Release, Stargazer } from '@gittrends-app/core';
+import { Release, Stargazer } from '@/core';
 import { Select, SelectItem } from '@heroui/react';
 import { EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';

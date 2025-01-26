@@ -1,5 +1,5 @@
+import { Release, RepositoryNode, Stargazer, Watcher } from '@/core';
 import { createBrowserService } from '@/helpers/github/browser';
-import { Release, RepositoryNode, Stargazer, Watcher } from '@gittrends-app/core';
 import { useEffect, useState } from 'react';
 import { useBoolean } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';

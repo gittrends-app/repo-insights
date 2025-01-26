@@ -1,10 +1,10 @@
 'use client';
 
+import { Actor, Reaction, User } from '@/core';
 import { ActorInfo } from '@/entities/ActorInfo';
 import useAuth from '@/hooks/useAuth';
 import useRepository from '@/hooks/useRepository';
 import useResources from '@/hooks/useResources';
-import { Actor, Reaction, User } from '@gittrends-app/core';
 import { Alert, Button, Skeleton, Spinner } from '@heroui/react';
 import { IconPlayerPauseFilled, IconPlayerPlayFilled } from '@tabler/icons-react';
 import { flatten, groupBy, mapValues, orderBy } from 'lodash';

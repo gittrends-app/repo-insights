@@ -1,4 +1,4 @@
-import { Repository, User } from '@gittrends-app/core';
+import { Repository, User } from '@/core';
 import { Avatar, Divider, Link } from '@heroui/react';
 import {
   Icon,

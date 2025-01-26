@@ -1,6 +1,6 @@
+import { User } from '@/core';
 import { ActorInfo } from '@/entities/ActorInfo';
 import { SocialPlatforms } from '@/helpers/social';
-import { User } from '@gittrends-app/core';
 import dayjs from 'dayjs';
 import { EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';

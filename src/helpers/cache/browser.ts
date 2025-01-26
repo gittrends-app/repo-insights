@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Cache, CacheService, ReleaseSchema, RepositorySchema, StargazerSchema } from '@gittrends-app/core';
+import { Cache, CacheService, ReleaseSchema, RepositorySchema, StargazerSchema } from '@/core';
 import { clear, createStore, del, get, set, UseStore } from 'idb-keyval';
 import lzString from 'lz-string';
 

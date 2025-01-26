@@ -1,7 +1,7 @@
 'use client';
 
+import { Actor } from '@/core';
 import { createBrowserService } from '@/helpers/github/browser';
-import { Actor } from '@gittrends-app/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { createContext, useEffect, useRef } from 'react';
 import { createStore, StoreApi, useStore } from 'zustand';

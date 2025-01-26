@@ -1,4 +1,4 @@
-import { Cache, CacheService, GithubClient, GithubService } from '@gittrends-app/core';
+import { Cache, CacheService, GithubClient, GithubService } from '@/core';
 import retry from 'fetch-retry';
 import pLimit from 'p-limit';
 import { Constructor } from 'type-fest';

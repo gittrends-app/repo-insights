@@ -1,5 +1,5 @@
+import { User } from '@/core';
 import { ActorInfo } from '@/entities/ActorInfo';
-import { User } from '@gittrends-app/core';
 import { Avatar, AvatarGroup, Link, Tooltip } from '@heroui/react';
 import { orderBy } from 'lodash';
 import numeral from 'numeral';

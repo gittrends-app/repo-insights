@@ -3,7 +3,7 @@
 import { Actor } from '@/core';
 import { createBrowserService } from '@/helpers/github/browser';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { createContext, useEffect, useRef } from 'react';
+import { createContext, useEffect, useMemo, useRef } from 'react';
 import { createStore, StoreApi, useStore } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const code = useMemo(() => searchParams.get('code'), [searchParams]);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const storeRef = useRef<any | null>(null);
 
@@ -29,14 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         (set) => ({
           user: null,
           signIn: async (accessToken: string) => {
-            const me = await fetch('https://api.github.com/user', {
-              headers: { Authorization: `bearer ${accessToken}` }
-            }).then(async (response) => {
-              if (!response.ok) throw new Error('Failed to get user');
-              return response.json();
-            });
-
-            const user = await createBrowserService('profile', accessToken).user(me.login, { byLogin: true });
+            const user = await createBrowserService('profile', accessToken).user();
             set({ user: { ...user!, __acess_token: accessToken } });
           },
           signOut: async () => set({ user: null })
@@ -49,17 +44,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const store = useStore(storeRef.current as StoreApi<UserProfile>);
 
   useEffect(() => {
-    const code = searchParams.get('code');
     if (code) {
-      fetch('/api/auth/github/access_token?code=' + code)
+      const controller = new AbortController();
+      fetch('/api/auth/github/access_token?code=' + code, { signal: controller.signal })
         .then((response) => response.json())
         .then((response) => {
-          if (response.access_token) store.signIn(response.access_token);
+          if (!controller.signal.aborted && response.access_token) store.signIn(response.access_token);
         })
         .finally(() => router.push(pathname));
+
+      return () => controller.abort();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams, store]);
+  }, [code]);
 
   return <AuthContext.Provider value={storeRef.current}>{children}</AuthContext.Provider>;
 };

@@ -75,7 +75,10 @@ export default function CacheManager(props: UseDisclosureProps) {
                 <li key={index}>
                   <div className={twMerge('inline-flex items-center gap-1', db.deleted && 'line-through')}>
                     <span>
-                      {db.name} <span className="text-gray-600 text-sm">(db_version: {db.version})</span>
+                      <Link href={`/r/${db.name}`} color="foreground">
+                        {db.name}
+                      </Link>
+                      <span className="text-gray-600 text-sm">(db_version: {db.version})</span>
                     </span>
                     <Link
                       onPress={() => confirmDeletion(db.name)}

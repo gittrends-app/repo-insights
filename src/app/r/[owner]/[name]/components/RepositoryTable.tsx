@@ -1,4 +1,4 @@
-import { User } from '@/core';
+import { Actor, User } from '@/core';
 import { ActorInfo } from '@/entities/ActorInfo';
 import { SocialPlatforms } from '@/helpers/social';
 import {
@@ -36,15 +36,19 @@ dayjs.extend(relativeFormat);
 export default function RepositoryTable({ actors }: { actors: ActorInfo[] }) {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState<number>(10);
-  const [descriptor, setDescriptor] = useState<SortDescriptor | undefined>(undefined);
+  const [descriptor, setDescriptor] = useState<SortDescriptor[]>([]);
   const [showDetails, setShowDetails] = useBoolean(false);
 
   const items = useMemo(() => {
-    const orderedItems = orderBy(
-      actors || [],
-      descriptor?.column === 'events' ? (e) => e.events.length : descriptor?.column,
-      descriptor?.direction === 'ascending' ? 'asc' : 'desc'
-    );
+    const orderedItems = descriptor
+      ? orderBy(
+          actors || [],
+          descriptor.map((desc) =>
+            desc.column === 'events' ? (e) => e.events.length : (e) => e[desc.column as keyof Actor] ?? ''
+          ),
+          descriptor.map((desc) => (desc.direction === 'ascending' ? 'asc' : 'desc'))
+        )
+      : actors;
     const start = (page - 1) * perPage;
     return orderedItems.slice(start, start + perPage) || [];
   }, [actors, descriptor, page, perPage]);
@@ -54,9 +58,12 @@ export default function RepositoryTable({ actors }: { actors: ActorInfo[] }) {
       isCompact
       isStriped
       removeWrapper
-      sortDescriptor={descriptor}
+      sortDescriptor={descriptor.at(0)}
       onSortChange={({ column, direction }) =>
-        setDescriptor({ column, direction: column !== descriptor?.column ? 'descending' : direction })
+        setDescriptor([
+          { column, direction: column !== descriptor.at(0)?.column ? 'descending' : direction },
+          ...descriptor.filter((d) => d.column !== column)
+        ])
       }
       bottomContent={
         <div className="flex max-sm:flex-col-reverse max-sm:gap-4 w-full justify-between max-sm:justify-center px-4 items-center">
@@ -203,13 +210,13 @@ export default function RepositoryTable({ actors }: { actors: ActorInfo[] }) {
                 </div>
               </TableCell>
               <TableCell hidden={!showDetails}>
-                {<Checkbox defaultSelected={user.is_hireable} isDisabled size="sm" />}
+                <Checkbox isSelected={user.is_hireable} isDisabled size="sm" color="default" />
               </TableCell>
               <TableCell hidden={!showDetails}>
-                {<Checkbox defaultSelected={user.is_github_star} isDisabled size="sm" />}
+                <Checkbox isSelected={user.is_github_star} isDisabled size="sm" color="default" />
               </TableCell>
               <TableCell hidden={!showDetails}>
-                {<Checkbox defaultSelected={user.is_campus_expert} isDisabled size="sm" />}
+                <Checkbox isSelected={user.is_campus_expert} isDisabled size="sm" color="default" />
               </TableCell>
             </TableRow>
           );

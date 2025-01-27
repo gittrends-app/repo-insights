@@ -16,12 +16,14 @@ import {
   NavbarItem,
   NavbarProps
 } from '@heroui/react';
-import { IconLogout, IconSearch } from '@tabler/icons-react';
+import { IconCloudDownload, IconLogout, IconSearch } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo } from 'react';
+import { useToggle } from 'react-use';
 import { twMerge } from 'tailwind-merge';
+import CacheManager from './CacheManager';
 import SignInButton from './SignInButton';
 
 /**
@@ -36,6 +38,8 @@ export default function Header(props: NavbarProps) {
 
   const isHome = useMemo(() => pathname === '/', [pathname]);
 
+  const [showCacheManager, toggleCacheManager] = useToggle(false);
+
   useEffect(() => {
     const token = searchParams.get('token');
     const redirectTo = searchParams.get('redirectTo');
@@ -44,6 +48,7 @@ export default function Header(props: NavbarProps) {
 
   return (
     <Suspense>
+      {showCacheManager && <CacheManager isOpen={showCacheManager} onClose={toggleCacheManager} />}
       <Navbar
         position={isHome ? 'static' : 'sticky'}
         {...props}
@@ -109,6 +114,15 @@ export default function Header(props: NavbarProps) {
                   <DropdownSection showDivider>
                     <DropdownItem key="info" onPress={signOut} classNames={{ title: 'text-center' }}>
                       Logged as <strong>{user.login}</strong> <br />
+                    </DropdownItem>
+                  </DropdownSection>
+                  <DropdownSection showDivider>
+                    <DropdownItem
+                      key="cache"
+                      onPress={toggleCacheManager}
+                      startContent={<IconCloudDownload size={'1rem'} />}
+                    >
+                      Cached data
                     </DropdownItem>
                   </DropdownSection>
                   <DropdownItem key="logout" onPress={signOut} startContent={<IconLogout size={'1rem'} />}>

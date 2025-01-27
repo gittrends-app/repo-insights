@@ -30,11 +30,6 @@ const fetcher = limiter(
 export function createService(namespace?: string, token?: string): GithubService;
 export function createService(namespace?: string, token?: string, Cache?: Constructor<Cache>): CacheService;
 export function createService(namespace: string = 'public', token?: string, Cache?: Constructor<Cache>) {
-  const normalizedNamespace = namespace
-    .replace('/', '@')
-    .replace(/[^a-zA-Z0-9@_]/g, '_')
-    .toLowerCase();
-
   const client = new GithubClient('https://api.github.com', { apiToken: token, fetcher });
 
   const baseService = new GithubService(client, {
@@ -56,5 +51,5 @@ export function createService(namespace: string = 'public', token?: string, Cach
     }
   });
 
-  return Cache ? new CacheService(baseService, new Cache(normalizedNamespace)) : baseService;
+  return Cache ? new CacheService(baseService, new Cache(namespace.toLowerCase())) : baseService;
 }

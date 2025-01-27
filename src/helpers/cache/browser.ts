@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Cache, CacheService, ReleaseSchema, RepositorySchema, StargazerSchema } from '@/core';
+import dayjs from 'dayjs';
 import { clear, createStore, del, get, set, UseStore } from 'idb-keyval';
 import lzString from 'lz-string';
 
@@ -35,7 +36,13 @@ export class BrowserCache implements Cache {
     if (!value) return null;
     else value = Object.assign({ __cached: true }, decompress(value));
 
+    if (!value.__cached_at) return null;
+
+    const diff = dayjs().diff(value.__cached_at, 'days', true);
+    if (diff > 7) return null;
+
     if (key.startsWith(CacheService.REPOSITORY_PREFIX)) {
+      if (diff > 1) return null;
       value = RepositorySchema.parse(value);
     } else if (key.startsWith(CacheService.RELEASES_PREFIX)) {
       Object.assign(value, { data: value.data.map((record: object) => ReleaseSchema.parse(record)) });
@@ -47,7 +54,7 @@ export class BrowserCache implements Cache {
   }
 
   async set<T>(key: string, value: T): Promise<void> {
-    await set(key, compress(value), this.cache);
+    await set(key, compress(Object.assign({ __cached_at: Date.now() }, value)), this.cache);
   }
 
   async remove(key: string): Promise<void> {

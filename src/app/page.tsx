@@ -65,7 +65,7 @@ export default function Home() {
         />
         {samples.value && (
           <div className="flex flex-col items-center gap-6 w-[35rem] max-sm:w-[22rem]">
-            <span className="text-sm text-gray-400 italic underline">or explore are some examples</span>
+            <span className="text-sm text-gray-400 italic underline">or explore some examples</span>
             <div className="text-center flex gap-2 flex-wrap justify-center px-1">
               {samples.value.items.map((repo) => (
                 <span key={repo.id}>

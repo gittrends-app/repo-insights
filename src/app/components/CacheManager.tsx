@@ -15,7 +15,6 @@ import { IconTrash } from '@tabler/icons-react';
 import numeral from 'numeral';
 import { useCallback, useReducer } from 'react';
 import { useAsync } from 'react-use';
-import { twMerge } from 'tailwind-merge';
 
 export default function CacheManager(props: UseDisclosureProps) {
   const { isOpen, onOpenChange, onClose } = useDisclosure(props);
@@ -28,15 +27,14 @@ export default function CacheManager(props: UseDisclosureProps) {
     const dbs = await indexedDB.databases();
     const data = await Promise.all(dbs.map(async (db) => ({ name: db.name!, version: db.version!, deleted: false })));
     return data.filter((db) => db.name.match(/(.*)\/(.*)$/g));
-  }, []);
+  }, [version]);
 
   const confirmDeletion = useCallback(
     (name: string) => {
       const response = confirm(`Are you sure you want to delete the cache for ${name}?`);
       if (response) {
-        indexedDB.deleteDatabase(name);
-        forceUpdate();
         databases.value!.find((db) => db.name === name)!.deleted = true;
+        indexedDB.deleteDatabase(name).onsuccess = () => forceUpdate();
       }
     },
     [databases.value]
@@ -73,12 +71,12 @@ export default function CacheManager(props: UseDisclosureProps) {
             {version &&
               databases.value?.map((db, index) => (
                 <li key={index}>
-                  <div className={twMerge('inline-flex items-center gap-1', db.deleted && 'line-through')}>
+                  <div className="inline-flex items-center">
                     <span>
-                      <Link href={`/r/${db.name}`} color="foreground">
+                      <Link href={`/r/${db.name}`} color="foreground" className={db.deleted ? 'line-through' : ''}>
                         {db.name}
                       </Link>
-                      <span className="text-gray-600 text-sm">(db_version: {db.version})</span>
+                      <span className="px-1 text-gray-600 text-sm">(db_version: {db.version})</span>
                     </span>
                     <Link
                       onPress={() => confirmDeletion(db.name)}

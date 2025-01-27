@@ -22,11 +22,11 @@ export default function CacheManager(props: UseDisclosureProps) {
 
   const [version, forceUpdate] = useReducer((x) => x + 1, 1);
 
+  const usage = useAsync(async () => (await navigator.storage.estimate()).usage, []);
+
   const databases = useAsync(async () => {
     const dbs = await indexedDB.databases();
-    const data = await Promise.all(
-      dbs.map(async (db) => ({ name: db.name!, size: (await navigator.storage.estimate()).usage!, deleted: false }))
-    );
+    const data = await Promise.all(dbs.map(async (db) => ({ name: db.name!, version: db.version!, deleted: false })));
     return data.filter((db) => db.name.match(/(.*)\/(.*)$/g));
   }, []);
 
@@ -59,7 +59,12 @@ export default function CacheManager(props: UseDisclosureProps) {
             leveraging IndexedDB, the app can work efficiently even with limited internet connectivity.
           </p>
           {databases.value?.length ? (
-            <p>At the moment, we have cached data from the following repositories:</p>
+            <>
+              <p className="border-y text-center text-sm text-gray-600" hidden={!usage.value}>
+                Estimated usage: <span className="text-red-400">{numeral(usage.value).format('0.0b')}</span>
+              </p>
+              <p>At the moment, we have cached data from the following repositories:</p>
+            </>
           ) : (
             <p>At the moment, you do not have any data cached in your browser :)</p>
           )}
@@ -70,11 +75,11 @@ export default function CacheManager(props: UseDisclosureProps) {
                 <li key={index}>
                   <div className={twMerge('inline-flex items-center gap-1', db.deleted && 'line-through')}>
                     <span>
-                      {db.name} ({numeral(db.size).format('0.0b')})
+                      {db.name} <span className="text-gray-600 text-sm">(db_version: {db.version})</span>
                     </span>
                     <Link
                       onPress={() => confirmDeletion(db.name)}
-                      className="hover:cursor-pointer -mt-1"
+                      className="hover:cursor-pointer"
                       isDisabled={db.deleted}
                     >
                       <IconTrash size={20} className="inline text-red-500" />

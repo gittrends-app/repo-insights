@@ -26,14 +26,14 @@
   },
   "dependencies": {
     "@gittrends-app/core": "file:libs/core",
-    "@heroui/react": "2.6.14",
+    "@heroui/react": "2.7.2",
     "@next/third-parties": "^15.1.6",
     "@tabler/icons-react": "^3.27.1",
     "dayjs": "^1.11.13",
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
     "fetch-retry": "^6.0.0",
-    "framer-motion": "^12.4.3",
+    "framer-motion": "^12.4.4",
     "idb-keyval": "^6.2.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
@@ -61,7 +61,7 @@
     "@types/react": "^19.0.2",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
-    "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/coverage-v8": "^3.0.6",
     "autoprefixer": "^10.4.20",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
@@ -82,7 +82,7 @@
     "tsx": "^4.19.2",
     "type-fest": "^4.31.0",
     "typescript": "^5.7.2",
-    "vitest": "^3.0.5"
+    "vitest": "^3.0.6"
   },
   "config": {
     "commitizen": {

@@ -93,7 +93,6 @@ export function StargazersGraph({ stargazers, releases }: { stargazers: Stargaze
               axisTick: { show: true }
             },
             yAxis: scale === 'linear' ? { type: 'value' } : { type: 'log', logBase: 2 },
-            // @ts-expect-error: Custom logic
             series: [
               {
                 name: 'Stargazers',
@@ -111,8 +110,7 @@ export function StargazersGraph({ stargazers, releases }: { stargazers: Stargaze
                 markPoint: {
                   tooltip: {
                     trigger: 'item',
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    formatter: (params: any) => `<b>${params.data.label}</b>: ${params.data.name}`,
+                    formatter: `<b>Releases:</b> {b}`,
                     borderColor: 'transparent'
                   },
                   data: showReleases
@@ -126,7 +124,6 @@ export function StargazersGraph({ stargazers, releases }: { stargazers: Stargaze
                         symbolKeepAspect: true,
                         name:
                           releases.slice(0, 3).join(', ') + (releases.length > 3 ? ` (+${releases.length - 3})` : ''),
-                        label: 'Releases',
                         yAxis: series.find((s) => s.date === date)?.stargazers || 0,
                         xAxis: date
                       }))

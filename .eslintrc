@@ -1,8 +1,13 @@
 {
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "next/core-web-vitals",
+    "plugin:react/jsx-runtime",
     "next/typescript",
     "plugin:@next/next/recommended"
   ]

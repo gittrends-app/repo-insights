@@ -14,9 +14,9 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "install": "run-s install-core install-submodules",
-    "install-core": "yarn install --ignore-scripts",
-    "install-submodules": "git submodule foreach yarn install --production",
+    "install": "run-s install-base install-core",
+    "install-base": "yarn install --ignore-scripts",
+    "install-core": "(cd libs/core && yarn install --production)",
     "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

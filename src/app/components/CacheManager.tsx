@@ -8,8 +8,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  useDisclosure,
-  UseDisclosureProps
+  UseDisclosureProps,
+  useDisclosure
 } from '@heroui/react';
 import { IconTrash } from '@tabler/icons-react';
 import numeral from 'numeral';

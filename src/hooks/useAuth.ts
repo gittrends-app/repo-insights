@@ -1,6 +1,6 @@
-import { AuthContext } from '@/providers/AuthProvider';
 import { useContext } from 'react';
 import { useStore } from 'zustand';
+import { AuthContext } from '@/providers/AuthProvider';
 
 /**
  *  Hook to use the authentication store

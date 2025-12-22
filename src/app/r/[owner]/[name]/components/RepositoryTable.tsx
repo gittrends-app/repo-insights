@@ -1,6 +1,3 @@
-import { Actor, User } from '@/core';
-import { ActorInfo } from '@/entities/ActorInfo';
-import { SocialPlatforms } from '@/helpers/social';
 import {
   Checkbox,
   Divider,
@@ -18,15 +15,18 @@ import {
   User as UserAvatar
 } from '@heroui/react';
 import { IconDownload, IconMail } from '@tabler/icons-react';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import relativeFormat from 'dayjs/plugin/relativeTime';
 import { countBy, orderBy } from 'lodash';
 import Link from 'next/link';
 import numeral from 'numeral';
 import { useMemo, useState } from 'react';
 import { useBoolean } from 'react-use';
+import { Actor, User } from '@/core';
+import { ActorInfo } from '@/entities/ActorInfo';
+import { SocialPlatforms } from '@/helpers/social';
 
-import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import relativeFormat from 'dayjs/plugin/relativeTime';
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeFormat);
 
@@ -194,7 +194,7 @@ export default function RepositoryTable({ actors }: { actors: ActorInfo[] }) {
 
                       return (
                         <span key={name} className="flex justify-center items-center text-xm">
-                          <Link href={`${url ? url + '/' : ''}${value}`} target="_blank">
+                          <Link href={`${url ? `${url}/` : ''}${value}`} target="_blank">
                             <Icon size="1.25em" />
                           </Link>
                         </span>

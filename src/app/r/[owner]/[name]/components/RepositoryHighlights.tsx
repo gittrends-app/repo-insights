@@ -1,12 +1,12 @@
-import { User } from '@/core';
-import { ActorInfo } from '@/entities/ActorInfo';
 import { Avatar, AvatarGroup, Link, Tooltip } from '@heroui/react';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { orderBy } from 'lodash';
 import numeral from 'numeral';
 import { useMemo } from 'react';
+import { User } from '@/core';
+import { ActorInfo } from '@/entities/ActorInfo';
 
-import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 dayjs.extend(localizedFormat);
 
 /**

@@ -1,5 +1,5 @@
-import { env } from '@/helpers/env/local';
 import { NextRequest, NextResponse } from 'next/server';
+import { env } from '@/helpers/env/local';
 
 /**
  *  Simple route to check if the server is up and running

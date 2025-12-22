@@ -1,8 +1,8 @@
-import { Release, RepositoryNode, Stargazer, Watcher } from '@/core';
-import { createService } from '@/helpers/github/browser';
 import { useEffect, useState } from 'react';
 import { useBoolean } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';
+import { Release, RepositoryNode, Stargazer, Watcher } from '@/core';
+import { createService } from '@/helpers/github/browser';
 import useAuth from './useAuth';
 import useRepository from './useRepository';
 

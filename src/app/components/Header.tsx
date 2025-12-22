@@ -1,6 +1,5 @@
 'use client';
 
-import useAuth from '@/hooks/useAuth';
 import {
   Avatar,
   Badge,
@@ -23,6 +22,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo } from 'react';
 import { useToggle } from 'react-use';
 import { twMerge } from 'tailwind-merge';
+import useAuth from '@/hooks/useAuth';
 import CacheManager from './CacheManager';
 import SignInButton from './SignInButton';
 

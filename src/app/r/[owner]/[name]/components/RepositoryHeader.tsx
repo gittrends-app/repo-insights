@@ -1,4 +1,3 @@
-import { Repository, User } from '@/core';
 import { Avatar, Divider, Link } from '@heroui/react';
 import {
   Icon,
@@ -15,6 +14,7 @@ import {
 import numeral from 'numeral';
 import { useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { Repository, User } from '@/core';
 
 /**
  *  RepositoryHeader component

@@ -1,10 +1,5 @@
 'use client';
 
-import { Actor, Reaction, User } from '@/core';
-import { ActorInfo } from '@/entities/ActorInfo';
-import useAuth from '@/hooks/useAuth';
-import useRepository from '@/hooks/useRepository';
-import useResources from '@/hooks/useResources';
 import { Alert, Button, Skeleton, Spinner } from '@heroui/react';
 import { IconPlayerPauseFilled, IconPlayerPlayFilled } from '@tabler/icons-react';
 import { flatten, groupBy, mapValues, orderBy } from 'lodash';
@@ -12,6 +7,11 @@ import { useParams } from 'next/navigation';
 import numeral from 'numeral';
 import { useEffect, useMemo } from 'react';
 import { useBoolean } from 'react-use';
+import { Actor, Reaction, User } from '@/core';
+import { ActorInfo } from '@/entities/ActorInfo';
+import useAuth from '@/hooks/useAuth';
+import useRepository from '@/hooks/useRepository';
+import useResources from '@/hooks/useResources';
 import Loading from './components/Loading';
 import { PageSection } from './components/PageSection';
 import RepositoryError from './components/RepositoryError';

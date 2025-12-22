@@ -1,5 +1,5 @@
-import { createService } from '@/helpers/github/browser';
 import { useAsync } from 'react-use';
+import { createService } from '@/helpers/github/browser';
 import useAuth from './useAuth';
 
 /**

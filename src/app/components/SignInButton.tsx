@@ -1,10 +1,10 @@
-import { env } from '@/helpers/env/browser';
 import { Button, ButtonProps } from '@heroui/react';
 import { IconBrandGithubFilled } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { env } from '@/helpers/env/browser';
 
 /**
  *  SignInButton component

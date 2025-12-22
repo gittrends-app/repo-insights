@@ -1,7 +1,7 @@
-import { Cache, CacheService, GithubClient, GithubService } from '@/core';
 import retry from 'fetch-retry';
 import pLimit from 'p-limit';
 import { Constructor } from 'type-fest';
+import { Cache, CacheService, GithubClient, GithubService } from '@/core';
 
 /**
  *
@@ -17,9 +17,9 @@ function limiter(func: typeof fetch) {
 const fetcher = limiter(
   retry(fetch, {
     retries: 3,
-    retryDelay: (attempt) => Math.pow(2, attempt) * 1000,
-    retryOn: (attempt, error, response) => {
-      return error !== null || response?.status == 403 ? true : false;
+    retryDelay: (attempt) => 2 ** attempt * 1000,
+    retryOn: (_attempt, error, response) => {
+      return !!(error !== null || response?.status === 403);
     }
   })
 );

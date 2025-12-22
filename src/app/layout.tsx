@@ -1,13 +1,12 @@
-import { AuthProvider } from '@/providers/AuthProvider';
 import { HeroUIProvider } from '@heroui/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { env } from '@/helpers/env/browser';
+import { AuthProvider } from '@/providers/AuthProvider';
 import Footnote from './components/Footnote';
 import Header from './components/Header';
-
-import { env } from '@/helpers/env/browser';
 import './globals.css';
 
 /**

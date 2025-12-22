@@ -1,11 +1,11 @@
 'use client';
 
-import { Actor } from '@/core';
-import { createService } from '@/helpers/github/browser';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { createContext, useEffect, useMemo, useRef } from 'react';
 import { createStore, StoreApi, useStore } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { Actor } from '@/core';
+import { createService } from '@/helpers/github/browser';
 
 type UserProfile = {
   user: (Actor & { __acess_token: string }) | null;
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (code) {
       const controller = new AbortController();
-      fetch('/api/auth/github/access_token?code=' + code, { signal: controller.signal })
+      fetch(`/api/auth/github/access_token?code=${code}`, { signal: controller.signal })
         .then((response) => response.json())
         .then((response) => {
           if (!controller.signal.aborted && response.access_token) store.signIn(response.access_token);

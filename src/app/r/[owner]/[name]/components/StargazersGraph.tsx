@@ -77,7 +77,7 @@ export function StargazersGraph({ stargazers, releases }: { stargazers: Stargaze
   return (
     <div className="flex max-sm:flex-col gap-2">
       <ReactECharts
-        className="!h-full grow"
+        className="h-full! grow"
         option={
           {
             grid: { left: 40, top: 20, right: 20, bottom: 20 },

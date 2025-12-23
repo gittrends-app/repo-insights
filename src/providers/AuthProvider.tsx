@@ -22,8 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const code = useMemo(() => searchParams.get('code'), [searchParams]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const storeRef = useRef<any | null>(null);
+  const storeRef = useRef<StoreApi<UserProfile> | null>(null);
 
   if (!storeRef.current) {
     storeRef.current = createStore(
@@ -34,7 +33,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const user = await createService('profile', accessToken, false).viewer();
             set({ user: { ...user!, __acess_token: accessToken } });
           },
-          signOut: async () => set({ user: null })
+          signOut: async () => {
+            set({ user: null });
+          }
         }),
         { name: 'profile-storage', storage: createJSONStorage(() => localStorage) }
       )
@@ -55,7 +56,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return () => controller.abort();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   return <AuthContext.Provider value={storeRef.current}>{children}</AuthContext.Provider>;

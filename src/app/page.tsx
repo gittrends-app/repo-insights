@@ -42,10 +42,10 @@ export default function Home() {
 
   return (
     <div className="h-full w-full flex flex-col items-center gap-8 mt-10">
-      <div className="text-[3rem] max-sm:text-[2.25rem] text-center font-black text-gray-600 w-[55rem] max-sm:w-[95vw] leading-tight">
+      <div className="text-[3rem] max-sm:text-[2.25rem] text-center font-black text-gray-600 w-220 max-sm:w-[95vw] leading-tight">
         Discover the developers powering your favorite GitHub project
       </div>
-      <div className="text-[1.5rem] max-sm:text-[1.15rem] text-gray-400 text-center w-[40rem] max-sm:w-[85vw]">
+      <div className="text-[1.5rem] max-sm:text-[1.15rem] text-gray-400 text-center w-160 max-sm:w-[85vw]">
         Insights on Stars, Watchers, Tags, Releases, and the Developers Behind Them
       </div>
       <div className="mb-12 max-sm:mb-6 flex flex-col items-center gap-4">
@@ -53,7 +53,7 @@ export default function Home() {
           placeholder="Find by name (e.g., octokit/octokit.js)"
           endContent={<IconSearch className="text-gray-600 cursor-pointer w-6 h-auto" onClick={find} />}
           type="search"
-          className="w-[35rem] max-sm:w-[22rem] my-2"
+          className="w-140 max-sm:w-88 my-2"
           value={name}
           onValueChange={(value) => setName(value)}
           classNames={{
@@ -64,7 +64,7 @@ export default function Home() {
           onKeyDown={(event) => event.key === 'Enter' && find()}
         />
         {samples.value && (
-          <div className="flex flex-col items-center gap-6 w-[35rem] max-sm:w-[22rem]">
+          <div className="flex flex-col items-center gap-6 w-140 max-sm:w-88">
             <span className="text-sm text-gray-400 italic underline">or explore some examples</span>
             <div className="text-center flex gap-2 flex-wrap justify-center px-1">
               {samples.value.items.map((repo) => (
@@ -85,7 +85,7 @@ export default function Home() {
       </div>
       <div>
         <Card isHoverable classNames={{ base: 'shadow-inner shadow-xl shadow-gray-400' }}>
-          <Image src="/images/octokit_octokit_js.jpg" alt="" className="max-w-[45rem] w-[90vw] h-auto" />
+          <Image src="/images/octokit_octokit_js.jpg" alt="" className="max-w-180 w-[90vw] h-auto" />
         </Card>
       </div>
     </div>

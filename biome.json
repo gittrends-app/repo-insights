@@ -27,9 +27,9 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noConsole": "off",
-        "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
+        "noConsole": "error",
+        "noExplicitAny": "error",
+        "noArrayIndexKey": "info",
         "noUnknownAtRules": "info"
       },
       "style": {
@@ -55,6 +55,11 @@
       "quoteStyle": "single",
       "attributePosition": "auto",
       "bracketSpacing": true
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   },
   "assist": {

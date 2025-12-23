@@ -3,7 +3,6 @@
 import dayjs from 'dayjs';
 import { clear, createStore, del, get, set, UseStore } from 'idb-keyval';
 import lzString from 'lz-string';
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Cache, CacheService, ReleaseSchema, RepositorySchema, StargazerSchema } from '@/core';
 
 /**
@@ -31,6 +30,7 @@ export class BrowserCache implements Cache {
   }
 
   async get<T>(key: string): Promise<T | null> {
+    // biome-ignore lint/suspicious/noExplicitAny: Acceptable
     let value: any = await get(key, this.cache);
 
     if (!value) return null;

@@ -95,7 +95,6 @@ export default function useResources<T extends RepositoryNode>(
       .finally(() => setLoading());
 
     return () => controller.abort();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, repo, resource, paused]);
 
   const controls = { hasMore: data.hasMore, cached: data.cached };

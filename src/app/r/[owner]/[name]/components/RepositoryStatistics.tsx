@@ -31,7 +31,7 @@ function FollowersFollowingChart({ actors, className }: { actors: ActorInfo[]; c
           tooltip: {
             trigger: 'axis',
             axisPointer: { type: 'cross' },
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: Disable any for ECharts params
             formatter: (params: any) => {
               return `<b>${params[0].data.user}</b> <br/> Followers: ${numeral(params[0].data.followers).format('0,0')} <br/> Following: ${numeral(params[0].data.following).format('0,0')}`;
             }
@@ -89,7 +89,7 @@ function AccountAgeChart({ actors, className }: { actors: ActorInfo[]; className
           ],
           tooltip: {
             trigger: 'item',
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: Disable any for ECharts params
             formatter: (params: any) => `<b>${params.value.age} year(s):</b> ${params.value.count} users`
           },
           xAxis: {
@@ -143,7 +143,7 @@ function AvailabilityChart({ actors, className }: { actors: ActorInfo[]; classNa
           tooltip: {
             trigger: 'axis',
             axisPointer: { type: 'shadow' },
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: Disable any for ECharts params
             formatter: ([params]: any) =>
               `<b>${params.value.key}:</b> ${numeral(params.value.count).format('0,0')} users`
           },
@@ -187,9 +187,9 @@ function AvailabilityChart({ actors, className }: { actors: ActorInfo[]; classNa
 export default function RepositoryStatistics(props: { actors: ActorInfo[] }) {
   return (
     <div className="w-full flex max-sm:flex-col gap-x-2">
-      <FollowersFollowingChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:!h-56" />
-      <AccountAgeChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:!h-56" />
-      <AvailabilityChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:!h-56" />
+      <FollowersFollowingChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:h-56!" />
+      <AccountAgeChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:h-56!" />
+      <AvailabilityChart {...props} className="w-1/3 h-80 max-sm:w-full max-sm:h-56!" />
     </div>
   );
 }

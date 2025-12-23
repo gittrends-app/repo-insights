@@ -4,7 +4,7 @@ import { IconFaceIdError, IconShieldLock } from '@tabler/icons-react';
 /**
  *  RepositoryError component
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: Accept any error type
 export default function RepositoryError(props: { error: any }) {
   if (props.error.status === 401) {
     return (

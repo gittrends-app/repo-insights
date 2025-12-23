@@ -71,7 +71,7 @@ export default function Header(props: NavbarProps) {
                   loading="eager"
                   width={100}
                   height={100}
-                  className="w-[2rem] h-[2rem]"
+                  className="w-8 h-8"
                 />
                 <span className="text-[1.5rem] text-gray-500 tracking-wide">
                   <strong>Repo</strong>Insights
@@ -89,8 +89,7 @@ export default function Header(props: NavbarProps) {
               className="w-80"
               onKeyDown={(event) => {
                 if (event.key !== 'Enter') return;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const name: string = (event.target as any).value;
+                const name: string = (event.target as HTMLInputElement).value;
                 if (!name.match(/^.+\/.+$/)) return alert('Invalid repository name');
                 router.push(`/r/${name}`);
               }}
